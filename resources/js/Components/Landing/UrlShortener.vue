@@ -33,7 +33,7 @@ function validateLink() {
 
 <template>
     <div class="flex justify-center">
-        <Card class="w-3/5 rounded-3xl bg-gray-50 dark:bg-gray-800">
+        <Card class="w-3/5 rounded-3xl bg-gray-50 dark:bg-neutral-900">
             <CardHeader>
                 <CardTitle class="text-4xl font-bold"
                     ><h1>Shorten a long link</h1></CardTitle
@@ -50,7 +50,7 @@ function validateLink() {
                             <Input
                                 id="link"
                                 placeholder="https://example.com/my-very-long-link"
-                                class="h-12 text-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+                                class="h-12 text-lg bg-white dark:bg-neutral-800 text-black dark:text-white"
                             />
                         </div>
                     </div>

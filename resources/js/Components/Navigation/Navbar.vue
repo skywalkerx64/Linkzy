@@ -192,7 +192,7 @@ const isOpen = ref<boolean>(false);
             </Button>
 
             <Button as-child aria-label="Login">
-                <a aria-label="View on GitHub" href="login"> Sign up Free </a>
+                <a aria-label="View on GitHub" href="register"> Sign up Free </a>
             </Button>
 
             <ToggleTheme />
