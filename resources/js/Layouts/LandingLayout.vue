@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import AppHeader from '@/Components/Landing/AppHeader.vue';
 </script>
 
 <template>
-    <body class="bg-white dark dark:bg-gray-900">
+    <body class="">
         <AppHeader />
         <slot />
         <AppFooter />
-        <div class="fixed inset-x-6 bottom-6 z-40 mx-auto w-max">
-        </div>
     </body>
 </template>
