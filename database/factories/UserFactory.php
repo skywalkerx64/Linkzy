@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -41,4 +43,12 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+    public function configure()
+{
+    return $this->afterCreating(function (User $user) {
+        // Assigner un rôle à l'utilisateur après sa création
+        $roles = Role::all()->pluck('id')->toArray(); // Vous pouvez personnaliser la logique de sélection du rôle
+        $user->roles()->attach($roles);
+    });
+}
 }

@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { useColorMode } from "@vueuse/core";
-const mode = useColorMode();
 import { Button } from "@/Components/ui/button";
 import { Moon, Sun } from "lucide-vue-next";
+
+const mode = useColorMode();
+let theme = localStorage.getItem('theme') as "light" | "dark" | "auto";
+if (!theme) {
+  theme = "dark";
+  localStorage.setItem('theme', theme);
+}
+mode.value = localStorage.getItem('theme') as "light" | "dark" | "auto";
+
+function toggleTheme() {
+    mode.value = mode.value === "dark" ? "light" : "dark";
+    localStorage.setItem('theme', mode.value);
+}
 </script>
 
 <template>
   <Button
-    @click="mode = mode === 'dark' ? 'light' : 'dark'"
+    @click="toggleTheme"
     size="sm"
     variant="ghost"
-    class="w-full justify-start"
+    class="w-fit justify-start"
   >
     <div
       v-if="mode == 'light'"

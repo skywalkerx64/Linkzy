@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { useColorMode } from "@vueuse/core";
-const mode = useColorMode();
-
 import { Button } from "@/Components/ui/button";
 import { ArrowRight } from "lucide-vue-next";
+import { toast } from 'vue-sonner'
+function toastIt()
+{
+    toast('This feature is currently in development', {
+        description: 'Comming Soon ...',
+        action: {
+          label: 'Register meanwhile',
+          onClick: () => console.log('Register meanwhile'),
+        },
+        closeButton: true,
+      })
+}
 </script>
 
 <template>
@@ -31,7 +40,7 @@ import { ArrowRight } from "lucide-vue-next";
         </p>
 
         <div class="space-y-4 md:space-y-0 md:space-x-4">
-          <Button class="w-5/6 md:w-1/4 font-bold group/arrow">
+          <Button class="w-5/6 md:w-1/4 font-bold group/arrow" @click="toastIt">
             Get Started
             <ArrowRight
               class="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform"

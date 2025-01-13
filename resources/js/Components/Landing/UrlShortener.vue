@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Button } from "@/Components/ui/button";
+import { ShineBorder } from "@/Components/ui/shine-border";
 import {
     Card,
     CardContent,
@@ -64,6 +65,7 @@ function validateLink() {
                     />
                 </Button>
             </CardFooter>
+
         </Card>
     </div>
 </template>

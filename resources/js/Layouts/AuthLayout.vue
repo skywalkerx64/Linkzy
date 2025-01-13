@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import ToggleTheme from "@/Components/Utils/ToggleTheme.vue";
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
         >
             <div class="w-full">
                 <div class="w-full max-w-md mx-auto p-6">
+                    <ToggleTheme class="absolute top-4 right-4" />
                     <slot />
                 </div>
             </div>
