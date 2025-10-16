@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Link\SearchLinkRequest;
-use App\Http\Requests\Link\StoreLinkRequest;
-use App\Http\Resources\Link\LinkResource;
-use Illuminate\Http\Request;
 use App\Models\Link;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Services\FaviconFetcherService;
+use App\Http\Resources\Link\LinkResource;
+use App\Http\Requests\Link\StoreLinkRequest;
+use App\Http\Requests\Link\SearchLinkRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class LinkController extends Controller
@@ -17,7 +19,7 @@ class LinkController extends Controller
         $title = $request->title;
         $description = $request->description;
         $original_url = $request->original_url;
-        $per_page = $request->per_page ?? 500;
+        $per_page = $request->per_page ?? 10;
         $page = $request->page ?? 1;
 
         $links = Link::query();
@@ -62,9 +64,23 @@ class LinkController extends Controller
 
     public function store(StoreLinkRequest $request)
     {
-        $link = Link::create($request->validated());
 
-        return response()->json(LinkResource::make($link), Response::HTTP_CREATED);
+        $slug = Str::random(8);
+        while (Link::where('slug', $slug)->exists()) {
+
+            $slug = Str::random(8);
+        }
+
+        $link = Link::create([
+            ...$request->validated(),
+            'slug' => $slug,
+            'shortened_url' => config('app.url') . '/' . $slug,
+            'user_id' => $request->user()->id,
+            'favicon' => FaviconFetcherService::fetchFromUrl($request->original_url),
+            'title' => FaviconFetcherService::getTitle($request->original_url),
+        ]);
+
+        return redirect()->intended(route('links.index'));
     }
 
     public function update(Request $request, $id)
@@ -87,5 +103,17 @@ class LinkController extends Controller
         } else {
             return response()->json(['message' => 'Link not found'], 404);
         }
+    }
+
+    public function generateSlug(Request $request)
+    {
+        $slug = Str::random(8);
+
+        while (Link::where('slug', $slug)->exists()) {
+
+            $slug = Str::random(8);
+        }
+
+        return response()->json(['slug' => $slug]);
     }
 }

@@ -22,6 +22,7 @@ export type PageProps<
 export type Link = {
     id: number;
     title: string;
+    slug: string;
     description: string;
     original_url: string;
     shortened_url: string;

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('description')->nullable();
+            $table->string('slug')->unique();
             $table->string('original_url');
             $table->string('shortened_url')->unique();
             $table->integer('visits')->default(0);

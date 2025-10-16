@@ -13,23 +13,16 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { ArrowRight } from "lucide-vue-next";
 import { ref } from "vue";
+import { vMaska } from "maska/vue";
+import type { MaskInputOptions } from "maska"
+
+// could be plain object too
+const options = reactive<MaskInputOptions>({
+  mask: "#-#",
+  eager: true
+})
 
 const link = ref("");
-
-function validateLink() {
-    const urlPattern = new RegExp(
-        "^(https?:\\/\\/)?" + // protocol
-            "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|" + // domain name
-            "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-            "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-            "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-            "(\\#[-a-z\\d_]*)?$",
-        "i"
-    ); // fragment locator
-    if (!urlPattern.test(link.value)) {
-        // alert("Please enter a valid URL.");
-    }
-}
 </script>
 
 <template>
@@ -48,7 +41,9 @@ function validateLink() {
                             <Label for="link" class="font-bold text-2xl my-4"
                                 >Paste your link here</Label
                             >
-                            <Input
+                            <input
+                                v-maska="options"
+                                type="number"
                                 id="link"
                                 placeholder="https://example.com/my-very-long-link"
                                 class="h-12 text-lg bg-white dark:bg-neutral-800 text-black dark:text-white"
@@ -65,7 +60,6 @@ function validateLink() {
                     />
                 </Button>
             </CardFooter>
-
         </Card>
     </div>
 </template>

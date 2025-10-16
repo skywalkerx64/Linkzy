@@ -14,6 +14,7 @@ class Link extends Model
     protected $fillable = [
         'title',
         'description',
+        'slug',
         'original_url',
         'shortened_url',
         'user_id',

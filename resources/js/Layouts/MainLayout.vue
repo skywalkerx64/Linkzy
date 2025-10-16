@@ -11,7 +11,6 @@ import ToggleTheme from '@/Components/Utils/ToggleTheme.vue'
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-import { Toaster } from '@/Components/ui/sonner'
 
 const sidebarLinks = [
     { href: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },

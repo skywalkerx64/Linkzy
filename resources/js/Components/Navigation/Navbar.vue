@@ -133,11 +133,7 @@ const isOpen = ref<boolean>(false);
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <div class="grid w-[600px] grid-cols-2 gap-5 p-4">
-                            <img
-                                src="https://www.radix-vue.com/logo.svg"
-                                alt="Beach"
-                                class="h-full w-full rounded-md object-cover"
-                            />
+                            <ApplicationLogo/>
                             <ul class="flex flex-col gap-2">
                                 <li
                                     v-for="{

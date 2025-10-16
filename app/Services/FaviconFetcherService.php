@@ -21,4 +21,10 @@ class FaviconFetcherService
     {
         return base64_encode($file);
     }
+
+    public static function getTitle($url) {
+		$data = file_get_contents($url);
+    $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $data, $matches) ? $matches[1] : null;
+    return $title;
+	}
 }

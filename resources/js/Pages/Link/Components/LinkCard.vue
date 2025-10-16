@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toast } from 'vue-sonner'
+import { toast } from "vue-sonner";
 
 import {
     Card,
@@ -32,27 +32,27 @@ async function copyURL(url: string) {
     console.log(url);
     try {
         await navigator.clipboard.writeText(url);
-        toast('Copied to clipboard !', {
+        toast("Copied to clipboard !", {
             description: url,
         });
     } catch ($e) {
-        toast('Failed to copy to clipboard !');
+        toast("Failed to copy to clipboard !");
     }
 }
 </script>
 
 <template>
-    <Card>
+    <Card class="overflow-hidden">
         <CardHeader>
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4">
                 <img
                     v-if="link.favicon"
                     :src="`data:image/png;base64,${link.favicon}`"
                     class="rounded-full size-6"
                 />
                 <Earth v-else />
-                <CardTitle class="text-xl"
-                    ><a :href="link.shortened_url" class="hover:text-primary">{{
+                <CardTitle class="text-lg"
+                    ><a :href="link.shortened_url" class="hover:text-primary truncate">{{
                         link.shortened_url
                     }}</a></CardTitle
                 >
@@ -64,18 +64,21 @@ async function copyURL(url: string) {
             >
         </CardHeader>
         <CardFooter class="flex items-center justify-between gap-4">
-            <div class="flex items-center justify-center gap-2">
+            <!-- <div class="flex items-center justify-center gap-2">
                 <Badge
                     class="bg-neutral-100 hover:bg-neutral-200 dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-900"
                     ><Calendar class="size-4 mr-2" />
                     {{ link.created_at }}</Badge
                 >
-            </div>
+            </div> -->
             <div class="flex items-center gap-4">
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger as-child>
-                            <Button variant="outline" size="sm" @click="copyURL(link.shortened_url)"
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                @click="copyURL(link.shortened_url)"
                                 ><Copy class="size-4"
                             /></Button>
                         </TooltipTrigger>
